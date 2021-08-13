@@ -62,13 +62,5 @@ class CreatDB {
         );",
     );
     
-    public function createdb(){
-
-        $crud = new CRUD;
-
-        foreach($this->createDatabase as $db){
-            $crud->createTable($db);
-        }
-    }
 
 }
