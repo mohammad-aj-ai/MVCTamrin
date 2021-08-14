@@ -4,7 +4,7 @@ namespace app\core\traits;
 
 use app\database\DBConnection;
 
-trait QueryBuilder{
+trait HasQueryBuilder{
 
     private $where = [];
     private $value = [];

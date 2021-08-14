@@ -2,13 +2,14 @@
 
 namespace app\core\Model;
 
-use app\traits\CRUD;
-use app\traits\HasAttribute;
-use app\traits\QueryBuilder;
+use app\core\traits\HasCRUD;
+use app\core\traits\HasAttribute;
+use app\core\traits\HasQueryBuilder;
+use app\core\traits\HasMethodCaller;
 
 class Model {
 
-    use QueryBuilder,CRUD,HasAttribute;
+    use HasQueryBuilder,HasCRUD,HasAttribute,HasMethodCaller;
 
     protected $fillable = [];
     protected $casts = [];
