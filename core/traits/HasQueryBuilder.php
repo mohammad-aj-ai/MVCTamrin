@@ -64,12 +64,14 @@ trait HasQueryBuilder{
         $sql.= ";";
         
         if(isset($this->value)){
-            DBConnection::Connection()->prepare($sql);
-            DBConnection::Connection()->execute($this->value);
+            $statment = DBConnection::Connection()->prepare($sql);
+            $statment->execute($this->value);
+              return $statment->fetchColumn();
         }
         else{
-            DBConnection::Connection()->prepare($sql);
-            DBConnection::Connection()->execute();
+            $statment = DBConnection::Connection()->prepare($sql);
+            $statment->execute();
+            return $statment->fetchColumn();
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\core\Model;
+namespace app\core\BaseModel;
 
 use app\core\traits\HasCRUD;
 use app\core\traits\HasAttribute;

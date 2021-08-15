@@ -2,7 +2,7 @@
 
 define('DBHOST','localhost');
 
-define('DBNAME','new_mvc');
+define('DBNAME','MVC_blog');
 
 define('DBUSERNAME','root');
 

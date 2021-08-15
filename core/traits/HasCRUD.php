@@ -5,20 +5,30 @@ use app\database\DBConnection;
 
 trait HasCRUD{
 
-    public function save(){
+    public function save()
+    {
 
     }
-    protected function fill(){
+    protected function fill()
+    {
 
     }
-    protected function find($query){
+    protected function find(String $query)
+    {
 
     }
-    protected function insert(){
+    protected function insert()
+    {
 
     }
-    protected function update(){
+    protected function update()
+    {
 
+    }
+    protected function all()
+    {
+        $this->setSql("SELECT * FROM ".$this->tableName());
+        return $this->Query();
     }
 
 }
