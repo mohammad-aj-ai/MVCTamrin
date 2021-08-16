@@ -56,14 +56,16 @@ class Route {
         global $routes;
         $routes['delete'][$path] = $callback;
     }
-    public function midleware($midleware){
+    public function midleware(String $midleware){
 
-        $class = "\app\app\midleware\\".$midleware;
-        $check = new $class;
-        if($check->check())
-            return $this;
+        $className = "\app\app\midleware\\".$midleware;
+        if(class_exists($className)){
+            if(call_user_func(array((string)$className, 'next')))
+                return $this;
+        } 
         else
             $this->redirectback();
+         
     }
 
     // how to write resource method

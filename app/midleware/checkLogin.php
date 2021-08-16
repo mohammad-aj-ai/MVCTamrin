@@ -2,10 +2,16 @@
 
 namespace app\app\midleware;
 
-class CheckLogin {
+use app\app\midleware\Middleware;
 
-    public function check() {
-        if(isset($_COOKIE['id']))
-            return true;
+class CheckLogin implements Middleware {
+
+    private function check() {
+        
+    }
+
+    public function next() : bool
+    {
+        return true;
     }
 }
