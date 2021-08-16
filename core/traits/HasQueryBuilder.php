@@ -66,12 +66,12 @@ trait HasQueryBuilder{
         if(isset($this->value)){
             $statment = DBConnection::Connection()->prepare($sql);
             $statment->execute($this->value);
-              return $statment->fetchColumn();
+              return $statment;
         }
         else{
             $statment = DBConnection::Connection()->prepare($sql);
             $statment->execute();
-            return $statment->fetchColumn();
+            return $statment;
         }
     }
 }

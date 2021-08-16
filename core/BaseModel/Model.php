@@ -18,6 +18,7 @@ class Model {
     protected $updated_at = 'updated_at';
     protected $collection = [];
     protected $table;
+    protected $hidden = [];
 
 
 }
