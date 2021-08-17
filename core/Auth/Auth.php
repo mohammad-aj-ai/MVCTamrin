@@ -2,6 +2,7 @@
 
 namespace app\core\Auth;
 
+use app\app\Models\User;
 use app\core\session\Session;
 
 class Auth {
