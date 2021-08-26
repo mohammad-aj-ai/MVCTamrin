@@ -2,9 +2,9 @@
 
 namespace app\core;
 
-use app\core\route\Request;
+use app\core\route\GetPath;
 
-class Routing extends Request {
+class Routing extends GetPath {
 
     private $route = [];
     private $method;
@@ -38,18 +38,16 @@ class Routing extends Request {
     }
     public function match()
     {
-        foreach($this->route[$this->method] as $path => $value){
+        foreach($this->route[$this->method] as $value){
 
-            if($this->compare($path)){
-                if(is_array($value))
-                    return ['class' => $value[0], 'method' => $value[1]];
-                if($value instanceof \Closure)
+            if($this->compare($value['url'])){
+                if(count($value) === 4)
+                    return ['class' => array_values($value)[1], 'method' => array_values($value)[2]];
+                elseif(array_values($value)[0] instanceof \Closure)
                     return $value;
-            }
-            else
-                return [];
-                
+            }  
         }
+        return [];
     }
     public function run()
     {
@@ -57,17 +55,18 @@ class Routing extends Request {
             return "404 error";
 
         $match = $this->match();
+        $class = array_values($match)[0];
+        $method = array_values($match)[1];
         if(is_array($match)){
-            $Path = __DIR__.'\app\controller\\'.$match['class'].'.php';
-            if(!file_exists($Path))
+            $Path = __DIR__.'\app\controller\\'.$class.'.php';
+            if(file_exists($Path))
                 return "404 error";
             
-            $className = "\app\app\controller\\".$match['class'];
+            $className = "\app\app\controller\\".$class;
             $classObject = new $className;
-
-            if(method_exists($classObject, $match['method']))
-                empty($this->values) ? call_user_func(array($classObject, $match['method'])) :
-                call_user_func_array(array($classObject, $match['method']), $this->values);
+            if(method_exists($classObject, $method))
+                empty($this->values) ? call_user_func(array($classObject, $method)) :
+                call_user_func_array(array($classObject, $method), $this->values);
         }
         else{
             call_user_func_array($match, $this->values);

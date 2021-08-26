@@ -2,59 +2,70 @@
 
 namespace app\core\route;
 
-use app\traits\view;
+use app\core\traits\view;
 use Closure;
 
 class Route {
 
-    use view;
-    public function get($path, $callback){
+    public function get($path, $callback, $name = null){
         
         if(is_string($callback) and stripos($callback, "@") != false){
                 $executeMethod = explode('@', $callback);
                 $class = $executeMethod[0];
                 $method = $executeMethod[1];
                 global $routes;
-                $routes['get'][$path] = ['class' => $class, 'method' => $method]; 
+                $routes['get'][] = ['url' => $path, 'class' => $class, 'method' => $method,
+             'name' => $name];
         }
-        global $routes;
-        $routes['get'][$path] = $callback;
+        else{
+            global $routes;
+            $routes['get'][] = ['closure' => $callback, 'url' => $path, 'name' => $name];
+        }
     }
-    public function post($path, $callback){
+    public function post($path, $callback, $name = null){
         
         if(is_string($callback) and stripos($callback, "@") != false){
                 $executeMethod = explode('@', $callback);
                 $class = $executeMethod[0];
                 $method = $executeMethod[1];
                 global $routes;
-                $routes['post'][$path] = ['class' => $class, 'method' => $method]; 
+                $routes['post'][] = ['url' => $path, 'class' => $class, 'method' => $method,
+             'name' => $name]; 
         }
-        global $routes;
-        $routes['post'][$path] = $callback;
+        else{
+            global $routes;
+            $routes['post'] = ['closure' => $callback, 'url' => $path, 'name' => $name];
+        }
     }
-    public function put($path, $callback){
+    public function put($path, $callback, $name = null){
         
         if(is_string($callback) and stripos($callback, "@") != false){
                 $executeMethod = explode('@', $callback);
                 $class = $executeMethod[0];
                 $method = $executeMethod[1];
                 global $routes;
-                $routes['put'][$path] = ['class' => $class, 'method' => $method]; 
+                $routes['put'][] = ['url' => $path, 'class' => $class, 'method' => $method,
+             'name' => $name]; 
         }
-        global $routes;
-        $routes['put'][$path] = $callback;
+        else{
+            global $routes;
+            $routes['put'] = ['closure' => $callback, 'url' => $path, 'name' => $name];
+        }
     }
-    public function delete($path, $callback){
+    public function delete($path, $callback, $name = null){
         
         if(is_string($callback) and stripos($callback, "@") != false){
                 $executeMethod = explode('@', $callback);
                 $class = $executeMethod[0];
                 $method = $executeMethod[1];
                 global $routes;
-                $routes['delete'][$path] = ['class' => $class, 'method' => $method]; 
+                $routes['delete'][] = ['url' => $path, 'class' => $class, 'method' => $method,
+             'name' => $name]; 
         }
-        global $routes;
-        $routes['delete'][$path] = $callback;
+         else{
+            global $routes;
+            $routes['delete'] = ['closure' => $callback, 'url' => $path, 'name' => $name];
+        }
     }
     public function midleware(String $midleware){
 
@@ -64,7 +75,7 @@ class Route {
                 return $this;
         } 
         else
-            $this->redirectback();
+            redirectback();
          
     }
 

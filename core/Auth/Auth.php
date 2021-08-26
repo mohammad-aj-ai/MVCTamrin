@@ -12,12 +12,12 @@ class Auth {
     public function user()
     {
         if(!Session::get('user'))
-            $this->redirect($this->redirectTo);
+            redirect($this->redirectTo);
         
         $user = User::find(Session::get('user'));
         if(empty($user)){
             Session::remove('user');
-            $this->redirect($this->redirectTo);
+            redirect($this->redirectTo);
         }
         else 
             return $user;

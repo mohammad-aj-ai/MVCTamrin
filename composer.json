@@ -2,7 +2,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
+            "app\\": "./",
             "System\\": "system/"
         }
     }

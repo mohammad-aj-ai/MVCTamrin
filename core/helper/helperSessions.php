@@ -2,6 +2,14 @@
 
 session_start();
 
+if(isset($_SESSION['flash']))
+    unset($_SESSION['tmp_flash']);
+
+if(isset($_SESSION['flash'])){
+    $_SESSION['tmp_flash'] = $_SESSION['flash'];
+    unset($_SESSION['flash']);
+}
+
 if(isset($_SESSION['old']))
     unset($_SESSION['tmp_old']);
 

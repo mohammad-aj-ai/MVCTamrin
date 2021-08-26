@@ -2,7 +2,7 @@
 
 namespace app\core\route;
 
-class Request
+class GetPath
 {
     public function getPath()
     {

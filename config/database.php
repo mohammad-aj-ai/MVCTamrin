@@ -1,8 +1,8 @@
 <?php
 
-define('DBHOST','localhost');
+define('DBHOST','127.0.0.1');
 
-define('DBNAME','MVC_blog');
+define('DBNAME','mvc_blog');
 
 define('DBUSERNAME','root');
 

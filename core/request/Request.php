@@ -2,14 +2,13 @@
 
 namespace app\core\request;
 
-use app\core\request\validationTraits\FileValidation;
-use app\core\request\validationTraits\NumberValidation;
-use app\core\request\validationTraits\Normallidation;
-use app\core\request\validationTraits\NormalValidation;
+use app\core\request\validationTraits\HasValidationRules;
+use app\core\request\validationTraits\HasFileValidation;
+
 
 class Request {
 
-    use NumberValidation,NormalValidation,FileValidation;
+    use HasValidationRules,HasFileValidation;
 
     private $errorExists = false;
     private $request;
