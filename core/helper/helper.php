@@ -96,3 +96,16 @@ function route($name, $params = [])
     }
     return currentDomain().'/'.trim($route, " /");
 }
+
+function view($dir, $params = [])
+{
+    $viewBiulder = new app\core\view\ViewBiulder;
+    $viewBiulder->run($dir);
+    $viewVars = $viewBiulder->vars;
+    $content = $viewBiulder->content;
+    empty($viewVars) ? : extract($viewVars);
+    empty($params) ? : extract($params);
+
+    eval('?>'.html_entity_decode($content));
+
+}

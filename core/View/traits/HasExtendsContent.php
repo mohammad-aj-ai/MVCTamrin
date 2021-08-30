@@ -10,7 +10,7 @@ trait HasExtendsContent{
     private function checkExtendsContent()
     {
         $layoutsFilePath = $this->findExtends();
-        if($layoutsFilePath){
+        if($layoutsFilePath != false){
             $this->extendsContent = $this->viewLoader($layoutsFilePath);
             $yieldsNamesArray = $this->findYieldsNames();
             if($yieldsNamesArray){
@@ -33,7 +33,7 @@ trait HasExtendsContent{
     private function findYieldsNames()
     {
         $yieldsNamesArray = [];
-       preg_match_all("/s*@yield+\('([^)]+)'\)/", $this->extendsContent, $yieldsNamesArray, PREG_UNMATCHED_AS_NULL);
+       preg_match_all("/@yield+\('([^)]+)'\)/", $this->extendsContent, $yieldsNamesArray, PREG_UNMATCHED_AS_NULL);
        return isset($yieldsNamesArray[1]) ? $yieldsNamesArray[1] : false;
     }
 

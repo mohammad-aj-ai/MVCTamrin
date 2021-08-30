@@ -33,8 +33,21 @@ class Composer {
     {
         $this->viewArray = $viewArray;
     }
-    private function getViewArray()
+    private function getViewVars()
     {
         return $this->vars;
+    }
+    public static function __callStatic($name, $arguments)
+    {
+        $instance = self::getInstance();
+        switch($name)
+        {
+            case "view":
+                call_user_func_array([$instance, "registerView"], $arguments);
+            case "setViews":
+                call_user_func_array([$instance, "setViewArray"], $arguments);
+            case "getVars":
+                call_user_func_array([$instance, "getViewVars"], $arguments);
+        }
     }
 }
